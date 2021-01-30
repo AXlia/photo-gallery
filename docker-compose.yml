@@ -1,0 +1,32 @@
+version: "3.8"
+services:
+  photo-gallery:
+    container_name: photo-gallery
+    image: photo-gallery-1.0.0
+    build:
+      context: .
+    ports:
+      - "3003:3003"
+    environment:
+      - EXTERNAL_PORT=3003
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=test
+      - MYSQL_DATABASE=photo_gallery
+      - MYSQL_HOST=photo-gallery_db # NAME OF THE SERVICE
+    depends_on:
+      - photo-gallery_db
+  photo-gallery_db:
+    container_name: photo-gallery_db
+    image: "mysql:5.7"
+    #restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=photo_gallery
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=test
+      - MYSQL_ROOT_PASSWORD=beetrootrootbeer
+    volumes:
+      - db_data:/var/lib/mysql
+volumes:
+  db_data: {}
