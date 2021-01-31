@@ -9,8 +9,8 @@
     "test": "jest",
     "seed": "node server/database/seed.js",
     "seed-container": "node server/database/seedContainer.js",
-    "react-dev": "webpack -d eval-source-map --watch",
-    "build": "webpack -d eval-source-map"
+    "react-dev": "webpack -d eval-source-map --watch && gzip client/public/bundle.js",
+    "build": "webpack && gzip client/public/bundle.js"
   },
   "repository": {
     "type": "git",
